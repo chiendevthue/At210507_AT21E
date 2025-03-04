@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+int main()
+{
+    double a,b,c;
+    scanf("%lf %lf %lf",&a,&b,&c);
+    double delta = b*b -4*a*c;
+    if (delta > 0)
+    {
+        printf("Phuong Trinh Co Hai Nghiem Phan Biet:");
+        printf("x1= %.2lf\n",((-b)-delta)/(2*a));
+        printf("                                     x2= %.2lf",((-b)+delta)/(2*a));
+    }
+    else if (delta == 0)
+    {
+        printf("Phong Trinh Co Nghiem Kep x1 = x2 = %.2lf",(-b)/(2*a));
+    }
+    else
+    {
+        printf("Phuong trinh Vo Nghiem");
+    }
+    return 0;
+}
