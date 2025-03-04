@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+int main()
+{
+    float x;
+    scanf("%f",&x);
+    printf("Binh Phuong = %.2f\n",x * x);
+    printf("Lap Phuong = %.2f\n",x * x * x);
+    printf("x Mu Bon = %.2f\n",x * x * x * x);
+    return 0;
+}
