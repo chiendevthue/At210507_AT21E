@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define PI 3.141592653589793
+int main()
+{
+    double a;
+    scanf("%lf",&a);
+    printf("Dien tich hinh cau = %.2lf\n",4*PI*a*a);
+    printf("The tich hinh cau = %.2lf\n",(4/3)*PI*a*a*a);
+    return 0;
+}
