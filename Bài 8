@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+int main()
+{
+    double a,b,c;
+    scanf("%lf %lf %lf",&a, &b,&c);
+    if ((a+b)>c && (a+c)>b  &&( b+c)>a)
+    {
+        if ((a*a+b*b==c*c)||(a*a+c*c==b*b)||(b*b+c*c==a*a))
+        {
+            printf("(%.5lf, %.5lf, %.5lf) la tam giac vuong\n",a,b,c);
+        }
+        else if (a==b && a==c)
+        {
+            printf("(%.5lf, %.5lf, %.5lf) la tam giac deu\n",a,b,c);
+        }
+        else if (a==b||a==c||b==c)
+        {
+            printf("(%.5lf, %.5lf, %.5lf) la tam giac can\n",a,b,c);
+        }
+        else
+        {
+            printf("(%.5lf, %.5lf, %.5lf) la tam giac thuong\n",a,b,c);
+        }
+        printf("Chu vi tam giac = %.2lf\n", a+b+c);
+        double p=(a+b+c)/2;
+        printf("Dien tich tam giac = %.2lf\n",sqrt(p*(p-a)*(p-b)*(p-c)));
+    }
+    else
+    {
+        printf("%.2lf, %.2lf, %.2lf khong the la 3 canh cua tam giac.Vui long nhap lai!",a,b,c);
+    }
+    return 0;
+}
