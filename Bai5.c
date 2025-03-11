@@ -7,7 +7,7 @@ int main()
     int x,i;
     scanf("%d",&x);
     printf("Cac uoc cua so vua nhap la: ");
-    for (i=1;i<=(x/2);i++)
+    for (i=1;i<=(x);i++)
     {
         if (x%i==0)
             printf("%d ",i);
