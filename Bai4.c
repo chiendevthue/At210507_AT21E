@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+int main()
+{
+    int x=0,i;
+    for (i=1;i<=100;i++)
+    {
+        if (i%2!=0)
+            x+=i;
+    }
+    printf("Tong la: %d",x);
+    return 0;
+}
