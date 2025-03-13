@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+void nhap_mang (int n,int a[])
+{
+    for (int i=0; i<n; i++)
+        scanf("%d",&a[i]);
+}
+int main()
+{
+    int a[100],n;
+    printf("Nhap mang so nguyen n phan tu(n<=100|Nhap n cho chuan): ");
+    scanf("%d",&n);
+    nhap_mang(n,a);
+    int tong=0,tong_le=0,tong_chan=0,so_chan=0,so_le=0;
+    for (int i=0; i<n; i++)
+    {
+        tong+=*(a+i);
+        if (*(a+i)%2==0)
+        {
+            tong_chan+=*(a+i);
+            so_chan++;
+        }
+        else if (*(a+i)%2!=0)
+        {
+            tong_le+=*(a+i);
+            so_le++;
+        }
+    }
+    printf("Tong ca mang la: %d\n",tong);
+    printf("Tong so le la: %d\n",tong_le);
+    printf("Tong so chan la: %d\n",tong_chan);
+    printf("Tbc ca mang la: %d\n",tong/n);
+    printf("Tbc so le la: %d\n",tong_le/so_le);
+    printf("Tbc so chan la: %d\n",tong_chan/so_chan);
+    return 0;
+}
