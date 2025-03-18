@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+void nhap_mang (int a[][100],int n,int m)
+{
+     for (int i=0; i<n; i++)
+    {
+        for (int j=0; j<m; j++)
+        {
+           scanf("%d",&a[i][j]);
+        }
+    }
+}
+void tong_mang (int a[][100],int b[][100],int n,int m)
+{
+     for (int i=0; i<n; i++)
+    {
+        for (int j=0; j<m; j++)
+        {
+           a[i][j]+=b[i][j];
+        }
+    }
+}
+void in_mang (int a[][100],int n,int m)
+{
+     for (int i=0; i<n; i++)
+    {
+        for (int j=0; j<m; j++)
+        {
+           printf("%d ",a[i][j]);
+        }
+        printf("\n");
+    }
+}
+int main ()
+{
+   int a[100][100],b[100][100];
+   int m,n;
+   printf("Nhap kich thuong mang:");
+   scanf("%d %d",&n,&m);
+   printf("Nhap mang 1:\n");
+   nhap_mang(a,n,m);
+   printf("Nhap mang 2:\n");
+   nhap_mang(b,n,m);
+   tong_mang(a,b,n,m);
+   printf("Tong 2 mang la:\n");
+   in_mang(a,n,m);
+    return 0;
+
+}
