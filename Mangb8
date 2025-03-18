@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+void nhap_mang (int a[],int n)
+{
+    for (int i=0; i<n; i++)
+    {
+        scanf("%d",&a[i]);
+    }
+}
+void in_mang (int a[],int n)
+{
+    for (int i=0; i<n; i++)
+    {
+        printf("%d ",a[i]);
+    }
+}
+void ghep_mang (int a[],int b[],int c[],int n,int m)
+{
+    int i,dem1=0,dem2=0;
+    int max_dex= (n>m) ? (max_dex=n) : (max_dex=n);
+    int min_dex= (n<m) ? (max_dex=n) : (max_dex=n);
+    for (i=0; i<n+m; i++)
+    {
+        if ((a[dem1] <= b[dem2]) || (dem2 == m))
+        {
+            c[i] = a[dem1++];
+        }
+        else if (dem1==n || a[dem1] < b[dem2])
+        {
+            c[i] = b[dem2++];
+        }
+    }
+}
+int main ()
+{
+    int n,m;
+    int a[104];
+    int b[105];
+    int c[210];
+    printf("Nhap so phan tu cua mang 1: ");
+    scanf("%d",&n);
+    nhap_mang(a,n);
+    printf("Nhap so phan tu cua mang 2: ");
+    scanf("%d",&m);
+    nhap_mang(b,m);
+    ghep_mang(a,b,c,n,m);
+    printf("Mang da ghep:");
+    in_mang(c,m+n);
+    return 0;
+}
