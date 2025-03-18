@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+void nhap_mang (int a[][100],int n,int m)
+{
+    for (int i=0; i<n; i++)
+    {
+        for (int j=0; j<m; j++)
+        {
+            scanf("%d",&a[i][j]);
+        }
+    }
+}
+void tich_mang (int a[][100],int b[][100],int c[][100],int n,int m,int p)
+{
+    int i,j,k;
+    for (i=0; i<n; i++)
+    {
+        for (j=0; j<p; j++)
+        {
+            int temp=0;
+            for (k=0; k<m; k++)
+            {
+                temp+= (a[i][k]*b[k][j]);
+            }
+            c[i][j]=temp;
+        }
+    }
+}
+void in_mang (int a[][100],int n,int m)
+{
+    for (int i=0; i<n; i++)
+    {
+        for (int j=0; j<m; j++)
+        {
+            printf("%d ",a[i][j]);
+        }
+        printf("\n");
+    }
+}
+int main ()
+{
+    freopen("D:\\hocc\\file.txt","r",stdin);
+    int a[100][100],b[100][100],c[100][100];
+    int n,m,p;
+    printf("Nhap kich thuong mang 1:");
+    scanf("%d %d",&n,&m);
+    nhap_mang(a,n,m);
+    printf("Nhap kich thuong mang 2:");
+    scanf("%d %d",&m,&p);
+    nhap_mang(b,m,p);
+    tich_mang(a,b,c,n,m,p);
+    printf("Tich hai mang la:\n");
+    in_mang(c,n,p);
+    return 0;
+}
