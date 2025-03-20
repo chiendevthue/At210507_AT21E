@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+int tinh_mu (int x,int y)
+{
+   int temp=x;
+   for (int i=1;i<y;i++)
+   {
+       temp*=x;
+   }
+   return temp;
+}
+int main ()
+{
+    int x,y;
+    printf("Nhap x va y: ");
+    scanf("%d %d",&x,&y);
+    int kq=tinh_mu(x,y);
+    printf("Ket qua %d^%d la: %d",x,y,kq);
+    return 0;
+}
