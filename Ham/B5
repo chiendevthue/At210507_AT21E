@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+void thap_phan_sang_bin(int a)
+{
+    int x;
+    for (x = 31; x >= 0; x--)
+    {
+        printf("%d", a >> x && 1);
+    }
+    printf("\n");
+}
+int bat_phan(int a)
+{
+    if (a == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        bat_phan(a / 8);
+        printf("%d", a % 8);
+    }
+
+    return 0;
+}
+int thap_luc_phan(int a)
+{
+    if (a == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        thap_luc_phan(a / 16);
+        int temp = a % 16;
+        switch (temp)
+        {
+        case 10:
+            printf("A");
+            break;
+        case 11:
+            printf("b");
+            break;
+        case 12:
+            printf("C");
+            break;
+        case 13:
+            printf("D");
+            break;
+        case 14:
+            printf("E");
+            break;
+        case 15:
+            printf("F");
+            break;
+        default:
+            printf("%d", temp);
+            break;
+        }
+    }
+}
+int main()
+{
+    int x;
+    printf("Nhap so thap phan: ");
+    scanf("%d", &x);
+    printf("So %d chuyen sang nhi phan la: ", x);
+    thap_phan_sang_bin(x);
+    printf("So %d chuyen sang bat phan la: ", x);
+    bat_phan(x);
+    printf("\n");
+    printf("So %d chuyen sang he thap luc phan la: ", x);
+    thap_luc_phan(x);
+    return 0;
+}
