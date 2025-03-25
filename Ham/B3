@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+int de_quy(int n)
+{
+    if (n == 0 || n == 1)
+    {
+        return n;
+    }
+    else
+    {
+        return de_quy(n - 1) + de_quy(n - 2);
+    }
+}
+int main()
+{
+    int n;
+    printf("Nhap phan tu thu n: ");
+    scanf("%d", &n);
+    printf("Phan tu fibonaci thu %d la: %d", n, de_quy(n));
+    return 0;
+}
