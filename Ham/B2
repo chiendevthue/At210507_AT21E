@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+int de_quy(int x)
+{
+    if (x == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return x + de_quy(x - 1);
+    }
+}
+int main()
+{
+    int n;
+    printf("Nhap n: ");
+    scanf("%d", &n);
+    printf("%d! = %d", n, de_quy(n));
+    return 0;
+}
