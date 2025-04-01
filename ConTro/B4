@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+void input(double *a, int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        scanf("%lf", (a + i));
+    }
+}
+void doi_cho(double *a, double *b)
+{
+    double temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
+}
+void output(double *a, int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        printf("%.2lf ", *(a + i));
+    }
+}
+void soft(double *a, int len)
+{
+    int i, k;
+    for (i = k - 1; i >= 1; i--)
+    {
+        for (k = 0; k < i; k++)
+        {
+            if (*(a + k) > *(a + k + 1))
+            {
+                doi_cho((a + k), (a + k + 1));
+            }
+        }
+    }
+}
+int main()
+{
+    printf("Nhap do dai cua mang: ");
+    int len;
+    scanf("%d", &len);
+    double *a = (double *)malloc(len * sizeof(double));
+    printf("Nhap phan tu cua mang: ");
+    input(a, len);
+    soft(a, len);
+    printf("Mang da sap xep la: ");
+    output(a, len);
+    free(a);
+    return 0;
+}
