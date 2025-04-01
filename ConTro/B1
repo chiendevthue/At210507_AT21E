@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    double *a, *b;
+    printf("NHap a va b: ");
+    scanf("%lf %lf", a, b);
+    printf("a va b sau khi doi cho la: ");
+    printf("a= %.2lf,b= %.2lf", *b, *a);
+    return 0;
+}
