@@ -16,14 +16,16 @@ void doi_cho (int a[],int i,int j)
 }
 void sap_xep (int a[],int n)
 {
-    int i,k;
-    for (i=n-1; i>=0; i--)
+    int i, k;
+    for (i = k - 1; i >= 1; i--)
     {
-      for (k=0;k<n-1;k++)
-      {
-          if (a[k]>a[k+1])
-            doi_cho(a,k,k+1);
-      }
+        for (k = 0; k < i; k++)
+        {
+            if (a[k] > a[k+1])
+            {
+                doi_cho(a[k], a[k+1]);
+            }
+        }
     }
 }
 void in_mang (int a[],int n)
