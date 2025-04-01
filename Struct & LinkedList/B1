@@ -1,0 +1,140 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <malloc.h>
+#include <string.h>
+typedef struct infor
+{
+    char ten_hang[6];
+    int don_gia;
+    int so_luong;
+    int thanh_tien;
+    struct infor *next;
+} infor;
+typedef struct
+{
+    infor *first;
+    infor *last;
+} linklist;
+linklist *creat_list()
+{
+    linklist *list = (linklist *)malloc(sizeof(linklist));
+    list->first = NULL;
+    list->last = NULL;
+    return list;
+}
+void add_first(linklist *list, infor *node)
+{
+    list->first = node;
+    list->last = node;
+}
+void delete_enter(char a[])
+{
+    int b = strlen(a);
+    if (a[b - 1] == '\n')
+        a[b - 1] = '\0';
+}
+void input_infor(infor *node)
+{
+    printf("Nhap ten hang:");
+    fgets(node->ten_hang, 6, stdin);
+    delete_enter(node->ten_hang);
+    printf("Nhap don gia:");
+    scanf("%d", &node->don_gia);
+    getchar();
+    printf("Nhap so luong:");
+    scanf("%d", &node->so_luong);
+    getchar();
+    node->thanh_tien = node->so_luong * node->don_gia;
+    node->next = NULL;
+}
+void after(linklist *list, infor *node)
+{
+    list->last->next = node;
+    list->last = node;
+}
+void print_list(linklist *list)
+{
+    printf("STT   Ten Hang   Don Gia  So luong  Thanh tien\n");
+    infor *pnode = list->first;
+    int stt = 1;
+    while (pnode != NULL)
+    {
+        printf(" %-5d %-9s %-10d %-10d %-12d\n", stt++, pnode->ten_hang, pnode->don_gia, pnode->so_luong, pnode->thanh_tien);
+        pnode = pnode->next;
+    }
+}
+void doi_cho(int *a, int *b)
+{
+    int temp;
+    temp = a;
+    a = b;
+    b = temp;
+}
+infor *mid_list(infor *node)
+{
+    infor *fast = node;
+    infor *slow = node;
+    while (fast != NULL && fast->next != NULL)
+    {
+        fast = fast->next->next;
+        if (fast != NULL)
+        {
+            slow = slow->next;
+        }
+    }
+    infor *temp = slow->next;
+    slow->next = NULL;
+    return temp;
+}
+infor *merge(infor *first, infor *second)
+{
+    if (first == NULL)
+        return second;
+    if (second == NULL)
+        return first;
+    if (first->ten_hang[0] < second->ten_hang[0])
+    {
+        first->next = merge(first->next, second);
+        return first;
+    }
+    else
+    {
+
+        second->next = merge(first, second->next);
+        return second;
+    }
+}
+infor *mergersort(infor *head)
+{
+    if (head == NULL || head->next == NULL)
+        return head;
+    infor *second = mid_list(head);
+    head = mergersort(head);
+    second = mergersort(second);
+    return merge(head, second);
+}
+int main()
+{
+    int n, i;
+    printf("Nhap so luong mat hang:");
+    scanf("%d", &n);
+    getchar();
+    linklist *list = creat_list();
+    for (i = 0; i < n; i++)
+    {
+        infor *node = (infor *)malloc(sizeof(infor));
+        if (list->first == NULL)
+        {
+            input_infor(node);
+            add_first(list, node);
+        }
+        else
+        {
+            input_infor(node);
+            after(list, node);
+        }
+    }
+    list->first = mergersort(list->first);
+    print_list(list);
+    return 0;
+}
