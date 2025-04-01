@@ -1,49 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
-void nhap_mang (int a[],int n)
+void nhap_mang(int a[], int n)
 {
-    for (int i=0; i<n; i++)
+    for (int i = 0; i < n; i++)
     {
-        scanf("%d",&a[i]);
+        scanf("%d", &a[i]);
     }
 }
-void doi_cho (int a[],int i,int j)
+void doi_cho(int a[], int i, int j)
 {
     int temp;
-    temp=a[i];
-    a[i]=a[j];
-    a[j]=temp;
+    temp = a[i];
+    a[i] = a[j];
+    a[j] = temp;
 }
-void sap_xep (int a[],int n)
+void sap_xep(int a[], int n)
 {
     int i, k;
     for (i = k - 1; i >= 1; i--)
     {
         for (k = 0; k < i; k++)
         {
-            if (a[k] > a[k+1])
+            if (a[k] > a[k + 1])
             {
-                doi_cho(a[k], a[k+1]);
+                doi_cho(a, k, k + 1);
             }
         }
     }
 }
-void in_mang (int a[],int n)
+void in_mang(int a[], int n)
 {
-    for (int i=0; i<n; i++)
+    for (int i = 0; i < n; i++)
     {
-        printf("%d ",a[i]);
+        printf("%d ", a[i]);
     }
 }
-int main ()
+int main()
 {
     int n;
     int a[1005];
     printf("Nhap so phan tu cua mang: ");
-    scanf("%d",&n);
-    nhap_mang(a,n);
-    sap_xep(a,n);
+    scanf("%d", &n);
+    nhap_mang(a, n);
+    sap_xep(a, n);
     printf("Mang da sap xep:");
-    in_mang(a,n);
+    in_mang(a, n);
     return 0;
 }
