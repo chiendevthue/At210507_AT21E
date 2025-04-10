@@ -39,7 +39,7 @@ void in_mang(int a[][100], int n, int m, FILE *fp)
 }
 int main()
 {
-    char *name = "//home//chien//File_c//testcase.txt";
+    char *name = "//home//chien//File_c//TICH_MT.C";
     FILE *fp;
     fp = fopen(name, "at");
     int a[100][100], b[100][100], c[100][100];
