@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+void nhap_mang(int a[][100], int n, int m)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            scanf("%d", &a[i][j]);
+        }
+    }
+}
+void tich_mang(int a[][100], int b[][100], int c[][100], int n, int m, int p)
+{
+    int i, j, k;
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < p; j++)
+        {
+            int temp = 0;
+            for (k = 0; k < m; k++)
+            {
+                temp += (a[i][k] * b[k][j]);
+            }
+            c[i][j] = temp;
+        }
+    }
+}
+void in_mang(int a[][100], int n, int m, FILE *fp)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            fprintf(fp, "%d ", a[i][j]);
+        }
+        fprintf(fp, "\n");
+    }
+}
+int main()
+{
+    char *name = "//home//chien//File_c//testcase.txt";
+    FILE *fp;
+    fp = fopen(name, "at");
+    int a[100][100], b[100][100], c[100][100];
+    int n, m1, m2, p;
+    printf("Nhap kich thuong mang 1:");
+    scanf("%d %d", &n, &m1);
+    nhap_mang(a, n, m1);
+    fprintf(fp, "Mang 1 co kich thuoc %dx%d la:\n", n, m1);
+    in_mang(a, n, m1, fp);
+
+    printf("Nhap kich thuong mang 2:");
+    scanf("%d %d", &m2, &p);
+    nhap_mang(b, m2, p);
+    fprintf(fp, "Mang 2 co kich thuoc %dx%dla:\n", m2, p);
+    in_mang(b, m2, p, fp);
+    if (m1 != m2)
+    {
+        fprintf(fp, "Khong the nhan hai ma tran nay");
+        return 0;
+    }
+
+    tich_mang(a, b, c, n, m1, p);
+    fprintf(fp, "Tich hai mang co kich thuoc %dx%d la:\n", n, p);
+    in_mang(c, n, p, fp);
+    fclose(fp);
+    return 0;
+}
