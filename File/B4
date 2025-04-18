@@ -1,0 +1,259 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+typedef struct Infor
+{
+    char hoTen[15];
+    int tuoi;
+    float diem_trung_binh;
+    struct Infor *next;
+} Infor;
+typedef struct
+{
+    char hoTen[15];
+    int tuoi;
+    float diem_trung_binh;
+} templl;
+typedef struct
+{
+    Infor *first;
+    Infor *last;
+} List;
+List *creat_new_list()
+{
+    List *list = (List *)malloc(sizeof(List));
+    list->first = NULL;
+    list->last = NULL;
+    return list;
+}
+Infor *previnfor = NULL;
+void delete_enter(char a[])
+{
+    int len = strlen(a);
+    if (a[len - 1] == '\n')
+    {
+        a[len - 1] = '\0';
+    }
+}
+Infor *search_infor(List *list, char *name)
+{
+    Infor *infor = list->first;
+    previnfor = NULL;
+    while (infor != NULL)
+    {
+        if (strcmp(infor->hoTen, name) == 0)
+            return infor;
+        previnfor = infor;
+        infor = infor->next;
+    }
+    return NULL;
+}
+Infor *creat_new_infor()
+{
+    Infor *infor = (Infor *)malloc(sizeof(Infor));
+    printf("Nhap ho ten: ");
+    fgets(infor->hoTen, 15, stdin);
+    delete_enter(infor->hoTen);
+    printf("Nhap tuoi:");
+    scanf("%d", &infor->tuoi);
+    getchar();
+    printf("Nhap diem trung binh:");
+    scanf("%f", &infor->diem_trung_binh);
+    getchar();
+    infor->next = NULL;
+    return infor;
+}
+void add_first_node(List *list, Infor *infor)
+{
+    list->first = infor;
+    list->last = infor;
+}
+void add_after(List *list, Infor *infor)
+{
+    list->last->next = infor;
+    list->last = infor;
+}
+void delete_infor(List *list, char *name)
+{
+    Infor *infor = search_infor(list, name);
+    if (infor == NULL)
+    {
+        printf("Khong tim thay sinh vien can xoa!\n");
+        return;
+    }
+    else if (infor == list->first)
+    {
+        if (infor == list->last)
+        {
+            free(infor);
+            list->first = NULL;
+            list->last = NULL;
+        }
+        else
+        {
+            list->first = infor->next;
+            free(infor);
+        }
+    }
+    else if (infor == list->last)
+    {
+        list->last = previnfor;
+        list->last->next = NULL;
+        free(infor);
+    }
+    else
+    {
+        previnfor->next = infor->next;
+        free(infor);
+    }
+}
+void them_sinh_vien(List *list, Infor *infor, char *name)
+{
+    Infor *temp = search_infor(list, name);
+    if (temp == NULL)
+        printf("Khong tim thay sinh vien can chen vao truoc!\n");
+    else if (strcmp(temp->hoTen, infor->hoTen) == 0)
+    {
+        printf("Khong the chen them vi sinh vien da ton tai!\n");
+    }
+    else if (temp == list->first)
+    {
+        list->first = infor;
+        infor->next = temp;
+    }
+    else if (previnfor != NULL)
+    {
+        previnfor->next = infor;
+        infor->next = temp;
+    }
+}
+void menu()
+{
+    printf("1. Them sinh vien\n");
+    printf("2. Xoa sinh vien\n");
+    printf("3. Chen them sinh vien\n");
+    printf("4. In danh sach\n");
+    printf("5.Thoat\n");
+}
+void pushFile(List *list)
+{
+    FILE *f = fopen("DSACH.C", "wb");
+    if (f == NULL)
+    {
+        printf("Khong mo duoc file de ghi!\n");
+    }
+    Infor *infor = list->first;
+    while (infor != NULL)
+    {
+        templl tempp;
+        tempp.diem_trung_binh = infor->diem_trung_binh;
+        tempp.tuoi = infor->tuoi;
+        strcpy(tempp.hoTen, infor->hoTen);
+        fwrite(&tempp, sizeof(templl), 1, f);
+        infor = infor->next;
+    }
+    fclose(f);
+}
+int prin_list(List *list)
+{
+    Infor *infor = list->first;
+    if (list->first == NULL)
+    {
+        printf("Vui long nhap thong tin!\n");
+        return 0;
+    }
+    printf("\t\tDanh sach sinh vien:\n");
+    printf("Stt\tHo ten\t\tTuoi\tDiem TB\n");
+    int stt = 1;
+    while (infor != NULL)
+    {
+        printf("%d\t%-15s\t%3d\t%.2f\n", stt++, infor->hoTen, infor->tuoi, infor->diem_trung_binh);
+
+        infor = infor->next;
+    }
+}
+void delete_list(List *list)
+{
+    Infor *infor = list->first;
+    while (infor != NULL)
+    {
+        Infor *temp = infor;
+        infor = infor->next;
+        free(temp);
+    }
+    free(list);
+}
+int main()
+{
+    List *list = creat_new_list();
+    int option = 1, expression, so_luong;
+    char *name = (char *)malloc(15 * sizeof(char));
+    while (option != 5)
+    {
+        menu();
+        printf("Nhap lua chon: ");
+        scanf("%d", &expression);
+        getchar();
+        switch (expression)
+        {
+        case 1:
+        {
+            printf("Nhap so luong sinh vien can them: ");
+            scanf("%d", &so_luong);
+            getchar();
+            for (int i = 0; i < so_luong; i++)
+            {
+                Infor *infor = creat_new_infor();
+                if (search_infor(list, infor->hoTen) != NULL)
+                {
+                    printf("Sinh vien \"%s\" da ton tai,khong the them!\n", infor->hoTen);
+                    free(infor);
+                    continue;
+                };
+                if (list->first == NULL)
+                    add_first_node(list, infor);
+                else
+                    add_after(list, infor);
+            }
+            pushFile(list);
+            break;
+        }
+        case 2:
+        {
+            printf("Nhap ten sinh vien muon xoa: ");
+            fgets(name, 15, stdin);
+            delete_enter(name);
+            delete_infor(list, name);
+            pushFile(list);
+            break;
+        }
+        case 3:
+        {
+            printf("Nhap ten sinh vien: ");
+            fgets(name, 15, stdin);
+            delete_enter(name);
+            printf("Nhap sinh vien can chen: \n");
+            Infor *infor = creat_new_infor();
+            them_sinh_vien(list, infor, name);
+            pushFile(list);
+            break;
+        }
+        case 4:
+        {
+            prin_list(list);
+            break;
+        }
+        case 5:
+        {
+            option = 5;
+            break;
+        }
+        default:
+            printf("Khong hop le,vui long nhap lai!\n");
+            break;
+        }
+    }
+    delete_list(list);
+    free(name);
+    return 0;
+}
