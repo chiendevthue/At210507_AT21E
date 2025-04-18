@@ -57,11 +57,14 @@ void print_list(linklist *list)
     printf("STT   Ten Hang   Don Gia  So luong  Thanh tien\n");
     infor *pnode = list->first;
     int stt = 1;
+    int sum=0;
     while (pnode != NULL)
     {
         printf(" %-5d %-9s %-10d %-10d %-12d\n", stt++, pnode->ten_hang, pnode->don_gia, pnode->so_luong, pnode->thanh_tien);
+        sum+=pnode->thanh_tien;
         pnode = pnode->next;
     }
+    printf("%44s: %d","Tong Tien",sum);
 }
 infor *mid_list(infor *node)
 {
