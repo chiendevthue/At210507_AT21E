@@ -63,7 +63,7 @@ void after(linklist *list, infor *node)
 void print_list(linklist *list)
 {
     FILE *f;
-    f=fopen("D:\\hocc\\file.txt","wb");
+    f=fopen("SO_LIEU.C","wb");
     printf("STT   Ten Hang   Don Gia  So luong  Thanh tien\n");
     infor *pnode = list->first;
     int stt = 1;
