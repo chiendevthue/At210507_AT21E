@@ -63,13 +63,6 @@ void print_list(linklist *list)
         pnode = pnode->next;
     }
 }
-void doi_cho(int *a, int *b)
-{
-    int temp;
-    temp = a;
-    a = b;
-    b = temp;
-}
 infor *mid_list(infor *node)
 {
     infor *fast = node;
